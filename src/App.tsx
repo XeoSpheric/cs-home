@@ -1,42 +1,14 @@
-import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { AppShell, Navbar, Header, Autocomplete, Grid, Input, InputWrapper } from "@mantine/core";
+import { AppShell } from "@mantine/core";
+import Navbar from "./components/Navbar";
+import { Route, Routes } from "react-router-dom";
 import "./App.scss";
-import {
-  ColorScheme,
-  ColorSchemeProvider,
-  MantineProvider,
-} from "@mantine/core";
+import Profile from "./pages/Profile";
 
-function App() {
-
+const App = () => {
   return (
     <AppShell
       padding="md"
-      navbar={
-        <Navbar width={{ base: 300 }} height={500} padding="xs">
-          
-        </Navbar>
-      }
-      header={
-        <Header height={60} padding="xs">
-          <Grid gutter={'sm'} columns={24} align={'center'}>
-            <Grid.Col span={1}>
-              <img src="/logo.png" className="w-8"></img>
-            </Grid.Col>
-            <Grid.Col span={4}>
-              <span>xeosmoot.com</span>
-            </Grid.Col>
-            <Grid.Col span={8}>
-              <InputWrapper
-                id="global-search"
-                size="md">
-                <Input id="global-search" placeholder="Search" />
-              </InputWrapper>
-            </Grid.Col>
-          </Grid>
-        </Header>
-      }
+      header={<Navbar></Navbar>}
       styles={(theme) => ({
         main: {
           backgroundColor:
@@ -46,13 +18,14 @@ function App() {
         },
       })}
     >
-      <Autocomplete
-        label="Your favorite framework/library"
-        placeholder="Pick one"
-        data={["React", "Angular", "Svelte", "Vue"]}
-      />
+      <Routes>
+        <Route path="/" element={<div>Home</div>} />
+        <Route path="/about" element={<div>about</div>} />
+        <Route path="/blog" element={<div>blogs</div>} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
     </AppShell>
   );
-}
+};
 
 export default App;
