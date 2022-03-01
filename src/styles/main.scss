@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --red: #ff3860;
   --red-dark: #ff1443;
@@ -54,4 +53,8 @@
   --card-border: 1px solid var(--nav-bg);
   --card-radius: 0.25em;
   transition: all .3s ease;
+}
+
+body {
+  background-color: #f8f9fa;
 }

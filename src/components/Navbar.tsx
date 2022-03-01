@@ -31,6 +31,14 @@ const Navbar = () => {
               </Button>
             </Link>
           </div>
+          {isLoggedIn ?
+          <div className="px-2">
+          <Link to={"/yut"}>
+            <Button variant="outline" color="teal">
+              Yut
+            </Button>
+          </Link>
+        </div> : null}
           <div className="px-2">
             <Link to={"/about"}>
               <Button variant="outline" color="teal">
