@@ -1,8 +1,9 @@
 import { AppShell } from "@mantine/core";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import "./App.scss";
+import "./styles/App.scss";
 import Profile from "./pages/Profile";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
       })}
     >
       <Routes>
-        <Route path="/" element={<div>Home</div>} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<div>about</div>} />
         <Route path="/blog" element={<div>blogs</div>} />
         <Route path="/profile" element={<Profile />} />
