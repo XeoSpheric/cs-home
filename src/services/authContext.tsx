@@ -1,6 +1,6 @@
-import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut, User, UserCredential } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUserInfo, updateUserDetails } from "./auth";
+import { createUser, getUserInfo, signIn, updateUserDetails } from "./auth";
 import UserDetails from "../models/userDetails";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -9,15 +9,9 @@ type AuthContextType = {
   user: User;
   userDetails: UserDetails;
   isLoggedIn: boolean;
-  signIn: (options: any) => Promise<{
-    user: User | null;
-    error: Error | null;
-  }>;
-  signUp: (options: any) => Promise<{
-    user: User | null;
-    error: Error | null;
-  }>;
-  updateUserDetails: (userDetails: UserDetails) => void;
+  signIn: (email: string, password: string) => Promise<UserCredential>;
+  signUp: (email: string, password: string) => Promise<UserCredential>;
+  updateUserDetails: (userDetails: UserDetails) => Promise<void>;
   signOut: () => void;
 };
 
@@ -50,8 +44,8 @@ const AuthContextProvider = (props: any) => {
     user,
     userDetails,
     isLoggedIn,
-    // signIn: (options: SignInOptions) => supabase.auth.signIn(options),
-    // signUp: (options: SignUpOptions) => supabase.auth.signUp(options),
+    signIn: (email: string, password: string) => signIn(email, password),
+    signUp: (email: string, password: string) => createUser(email, password),
     updateUserDetails: (userDetails: UserDetails) => {
       if (user) {
         updateUserDetails(user.uid, userDetails);

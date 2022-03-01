@@ -16,7 +16,6 @@ import { useUser } from "../services/authContext";
 const Profile = () => {
   const { userDetails, isLoggedIn, updateUserDetails } = useUser();
   const [state, handlers] = useAccordionState({ total: 1, initialItem: 0 });
-  const [error, setError] = useState<string>("Required");
   const breakpoints = [{ maxWidth: "sm" as const, cols: 1 }];
 
   const [email, setEmail] = useState<string>("");
