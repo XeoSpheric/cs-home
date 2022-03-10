@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import "./styles/App.scss";
+import Yut from "./pages/Yut/Yut";
+import Terms from "./pages/Terms";
 
 const App = () => {
   return (
@@ -13,9 +15,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<div>about</div>} />
-        <Route path="/yut" element={<div>Yut</div>} />
+        <Route path="/yut" element={<Yut />} />
         <Route path="/blog" element={<div>blogs</div>} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </AppShell>
   );

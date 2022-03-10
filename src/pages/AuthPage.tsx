@@ -72,6 +72,12 @@ const AuthPage = ({ close }: { close: () => void }) => {
     }
   };
 
+  const hitEnter = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'Enter') {
+      handleSave();
+    }
+  }
+
   useEffect(() => {
     setMatchStatus(password !== "" && password === confirmPassword);
   }, [password, confirmPassword]);
@@ -174,6 +180,7 @@ const AuthPage = ({ close }: { close: () => void }) => {
             placeholder="Password"
             value={password}
             onChange={(event) => setPassword(event.currentTarget.value)}
+            onKeyUp={(e) => hitEnter(e)}
             visibilityToggleIcon={({ reveal, size }) =>
               reveal ? <EyeOff size={size} /> : <EyeCheck size={size} />
             }
