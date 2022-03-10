@@ -12,7 +12,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 2rem;  
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden; 
+}
+
+.hero-content.show {
+  opacity: 1;
+  visibility: visible; 
 }
 
 .gradient-text {

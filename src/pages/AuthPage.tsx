@@ -19,6 +19,7 @@ import {
 import Requirement from "../models/passwordRequirement";
 import UserDetails from "../models/userDetails";
 import { useUser } from "../services/authContext";
+import "../styles/Home.scss"
 
 const AuthPage = ({ close }: { close: () => void }) => {
   const { signUp, updateUserDetails, signIn } = useUser();
@@ -94,6 +95,9 @@ const AuthPage = ({ close }: { close: () => void }) => {
 
   return (
     <>
+    <div className="w-full outline-none p-5 mb-5 text-center text-4xl gradient-text">
+      {isSignUp ? 'Hello There' : 'Welcome Back'}
+    </div>
       <SimpleGrid cols={1}>
         {isSignUp ? (
           <>
@@ -120,10 +124,12 @@ const AuthPage = ({ close }: { close: () => void }) => {
           value={email}
           onChange={(event) => setEmail(event.currentTarget.value)}
           required
+          data-autofocus
         />
         {isSignUp ? (
           <>
             <PasswordInput
+              required
               label="Password"
               placeholder="Password"
               description="Strong password should include letters in lower and uppercase, at least 1 number, at least 1 special symbol"
@@ -145,6 +151,7 @@ const AuthPage = ({ close }: { close: () => void }) => {
               onBlurCapture={() => setPopoverOpened(false)}
               target={
                 <PasswordInput
+                  required
                   label="Confirm password"
                   placeholder="Confirm password"
                   value={confirmPassword}
@@ -176,6 +183,7 @@ const AuthPage = ({ close }: { close: () => void }) => {
           </>
         ) : (
           <PasswordInput
+            required
             label="Password"
             placeholder="Password"
             value={password}

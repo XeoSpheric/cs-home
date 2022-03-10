@@ -14,14 +14,22 @@ const Navbar = () => {
 
   return (
     <>
-      <Modal opened={isOpened} onClose={() => setOpened(false)} hideCloseButton centered>
+      <Modal
+        transition="rotate-left"
+        transitionDuration={600}
+        transitionTimingFunction="ease"
+        opened={isOpened}
+        onClose={() => setOpened(false)}
+        hideCloseButton
+        centered
+      >
         <AuthPage close={closeModal} />
       </Modal>
       <Header height={55} padding="xs">
         <div className="flex flex-row">
-          <div className="flex-none w-8 h-8 mx-2">
+          <div className="flex-none w-9 h-9 mx-2">
             <Link to={"/"}>
-              <img src="/logo.png" alt="xeosmoot.com logo" />
+              <img src="/favicon.svg" alt="xeosmoot.com logo" />
             </Link>
           </div>
           <div className="px-2">
@@ -31,14 +39,15 @@ const Navbar = () => {
               </Button>
             </Link>
           </div>
-          {isLoggedIn ?
-          <div className="px-2">
-          <Link to={"/yut"}>
-            <Button variant="outline" color="teal">
-              Yut
-            </Button>
-          </Link>
-        </div> : null}
+          {isLoggedIn ? (
+            <div className="px-2">
+              <Link to={"/yut"}>
+                <Button variant="outline" color="teal">
+                  Yut
+                </Button>
+              </Link>
+            </div>
+          ) : null}
           <div className="px-2">
             <Link to={"/about"}>
               <Button variant="outline" color="teal">
@@ -63,7 +72,11 @@ const Navbar = () => {
                 </div>
               </>
             ) : (
-              <Button variant="outline" color="green" onClick={() => setOpened(true)}>
+              <Button
+                variant="outline"
+                color="green"
+                onClick={() => setOpened(true)}
+              >
                 Log In
               </Button>
             )}

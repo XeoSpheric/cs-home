@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import "./styles/App.scss";
 import Yut from "./pages/Yut/Yut";
 import Terms from "./pages/Terms";
+import Blog from "./pages/Blog";
 
 const App = () => {
   return (
@@ -14,9 +15,9 @@ const App = () => {
       header={<Navbar></Navbar>}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<div>about</div>} />
+        <Route path="/about" element={<Blog />} />
         <Route path="/yut" element={<Yut />} />
-        <Route path="/blog" element={<div>blogs</div>} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/terms" element={<Terms />} />
       </Routes>

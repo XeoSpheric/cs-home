@@ -6,9 +6,9 @@ const Yut = () => {
   
   return (
     <>
-    <YutTile black>
-      <YutPiece />
-    </YutTile>
+      <div>
+        Future Game to Play Co-Op
+      </div>
     </>
   )
 }
