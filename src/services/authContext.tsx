@@ -23,11 +23,16 @@ const AuthContextProvider = (props: any) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [isDarkMode, setMode] = useState<boolean | null>(null)
 
+
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       setUser(null);
       setLoginStatus(false);
+      setTimeout(() => {
+        if (user) return;
+        handleViewModeChanges(false);
+      },100);
       if (user) {
         setUser(user);
         setLoginStatus(true);
