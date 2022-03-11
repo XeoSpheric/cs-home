@@ -19,7 +19,7 @@ import {
 import Requirement from "../models/passwordRequirement";
 import UserDetails from "../models/userDetails";
 import { useUser } from "../services/authContext";
-import "../styles/Home.scss"
+import "../styles/Home.scss";
 
 const AuthPage = ({ close }: { close: () => void }) => {
   const { signUp, updateUserDetails, signIn } = useUser();
@@ -74,10 +74,10 @@ const AuthPage = ({ close }: { close: () => void }) => {
   };
 
   const hitEnter = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSave();
     }
-  }
+  };
 
   useEffect(() => {
     setMatchStatus(password !== "" && password === confirmPassword);
@@ -95,9 +95,9 @@ const AuthPage = ({ close }: { close: () => void }) => {
 
   return (
     <>
-    <div className="w-full outline-none p-5 mb-5 text-center text-4xl gradient-text">
-      {isSignUp ? 'Hello There' : 'Welcome Back'}
-    </div>
+      <div className="w-full outline-none p-5 mb-5 text-center text-4xl gradient-text">
+        {isSignUp ? "Hello There" : "Welcome Back"}
+      </div>
       <SimpleGrid cols={1}>
         {isSignUp ? (
           <>
