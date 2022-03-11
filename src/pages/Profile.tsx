@@ -58,7 +58,7 @@ const Profile = () => {
     updateUserDetails(newUserDetails);
   };
 
-  return (
+  return isLoggedIn ? (
     <Accordion
       state={state}
       onChange={handlers.setState}
@@ -118,6 +118,10 @@ const Profile = () => {
         Nothing is here yet...
       </Accordion.Item>
     </Accordion>
+  ) : (
+    <>
+      No user logged in. If you want to have a profile <span className="hi-gradient">Sign up Today</span>
+    </>
   );
 };
 
