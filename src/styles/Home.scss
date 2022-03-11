@@ -1,24 +1,17 @@
 @import "./main.scss";
 
 .home-hero {
-  margin-top: 3em;
-  padding: 4rem 7vw;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  border-bottom: 1px solid var(--gray1);
+  @apply flex flex-wrap py-16 px-32 mt-4 border-b-gray-200 border-b-2;
 }
 
 .hero-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0 2rem;  
+  @apply flex-col flex justify-center content-start transition-all ease-in-out pr-4 opacity-0;
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
-  opacity: 0;
   visibility: hidden; 
+  max-width: 700px;
 }
 
 .hero-content.show {
