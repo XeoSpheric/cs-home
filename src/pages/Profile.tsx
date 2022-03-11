@@ -8,13 +8,14 @@ import {
   TextInput,
   useAccordionState,
 } from "@mantine/core";
+import { Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { User, InfoCircle } from "tabler-icons-react";
 import UserDetails from "../models/userDetails";
 import { useUser } from "../services/authContext";
 
 const Profile = () => {
-  const { userDetails, isLoggedIn, updateUserDetails } = useUser();
+  const { userDetails, isLoggedIn, isDarkMode, updateUserDetails } = useUser();
   const [state, handlers] = useAccordionState({ total: 1, initialItem: 0 });
   const breakpoints = [{ maxWidth: "sm" as const, cols: 1 }];
 
@@ -28,7 +29,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (isLoggedIn && userDetails) {
-      console.log(userDetails.creation_date.toDate())
+      console.log(userDetails.creation_date.toDate());
       setEmail(userDetails.email);
       setFirstName(userDetails.first_name);
       setLastName(userDetails.last_name);
@@ -45,16 +46,18 @@ const Profile = () => {
   }, [userDetails, isLoggedIn]);
 
   const handleSave = () => {
+    const creation = userDetails?.creation_date
+      ? userDetails?.creation_date
+      : Timestamp.now();
     const newUserDetails: UserDetails = {
       first_name: firstName,
       last_name: lastName,
       about: about,
       email: email,
       language: language,
-      creation_date: userDetails.creation_date
+      creation_date: creation,
+      darkMode: isDarkMode,
     };
-
-    console.log(newUserDetails);
     updateUserDetails(newUserDetails);
   };
 
@@ -109,7 +112,12 @@ const Profile = () => {
           autosize
         />
         <Group position="right" mt="xl">
-          <Button variant="outline" color="blue" onClick={() => handleSave()} disabled={!firstName || !lastName}>
+          <Button
+            variant="outline"
+            color="blue"
+            onClick={() => handleSave()}
+            disabled={!firstName || !lastName}
+          >
             Update Profile
           </Button>
         </Group>
@@ -120,7 +128,8 @@ const Profile = () => {
     </Accordion>
   ) : (
     <>
-      No user logged in. If you want to have a profile <span className="hi-gradient">Sign up Today</span>
+      No user logged in. If you want to have a profile{" "}
+      <span className="hi-gradient">Sign up Today</span>
     </>
   );
 };

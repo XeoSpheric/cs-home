@@ -6,12 +6,14 @@ import UserDetails from "../models/userDetails";
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 type AuthContextType = {
-  user: User;
-  userDetails: UserDetails;
+  user: User | null;
+  userDetails: UserDetails | null;
   isLoggedIn: boolean;
+  isDarkMode: boolean | null;
+  setViewMode: (isDark: boolean) => void;
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signUp: (email: string, password: string) => Promise<UserCredential>;
-  updateUserDetails: (userDetails: UserDetails) => Promise<void>;
+  updateUserDetails: (userDetails: UserDetails) => void;
   signOut: () => void;
 };
 
@@ -19,6 +21,7 @@ const AuthContextProvider = (props: any) => {
   const [isLoggedIn, setLoginStatus] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const [isDarkMode, setMode] = useState<boolean | null>(null)
 
   useEffect(() => {
     const auth = getAuth();
@@ -36,14 +39,27 @@ const AuthContextProvider = (props: any) => {
     if (user) {
       getUserInfo().then((details: UserDetails) => {
         setUserDetails(details);
+        setMode(details.darkMode);
       });
     }
   }, [user]);
 
-  const value = {
+  const handleViewModeChanges = (isDark: boolean) => {
+    setMode(isDark);
+    if (userDetails && user) {
+      let tempDetails = userDetails;
+      tempDetails.darkMode = isDark;
+      setUserDetails(tempDetails);
+      updateUserDetails(user.uid, tempDetails)
+    }
+  }
+
+  const value: AuthContextType = {
     user,
     userDetails,
     isLoggedIn,
+    isDarkMode,
+    setViewMode: (isDark: boolean) => handleViewModeChanges(isDark),
     signIn: (email: string, password: string) => signIn(email, password),
     signUp: (email: string, password: string) => createUser(email, password),
     updateUserDetails: (userDetails: UserDetails) => {

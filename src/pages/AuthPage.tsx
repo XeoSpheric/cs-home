@@ -22,7 +22,7 @@ import { useUser } from "../services/authContext";
 import "../styles/Home.scss";
 
 const AuthPage = ({ close }: { close: () => void }) => {
-  const { signUp, updateUserDetails, signIn } = useUser();
+  const { signUp, updateUserDetails, signIn, isDarkMode } = useUser();
 
   const [popoverOpened, setPopoverOpened] = useState<boolean>(false);
 
@@ -55,14 +55,13 @@ const AuthPage = ({ close }: { close: () => void }) => {
         language: "en",
         about: "",
         creation_date: Timestamp.now(),
+        darkMode: isDarkMode,
       };
       const user = await signUp(email, password).catch((err: Error) => {
         console.warn(err.message);
       });
       if (!user) return;
-      updateUserDetails(userDetails).catch((err: Error) => {
-        console.warn(err.message);
-      });
+      updateUserDetails(userDetails);
       close();
     } else {
       const user = await signIn(email, password).catch((err: Error) => {
