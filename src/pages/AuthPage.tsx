@@ -57,11 +57,10 @@ const AuthPage = ({ close }: { close: () => void }) => {
         creation_date: Timestamp.now(),
         darkMode: isDarkMode,
       };
-      const user = await signUp(email, password).catch((err: Error) => {
+      const user = await signUp(email, password, userDetails).catch((err: Error) => {
         console.warn(err.message);
       });
       if (!user) return;
-      updateUserDetails(userDetails);
       close();
     } else {
       const user = await signIn(email, password).catch((err: Error) => {

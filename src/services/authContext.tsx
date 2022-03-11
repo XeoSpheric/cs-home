@@ -12,7 +12,7 @@ type AuthContextType = {
   isDarkMode: boolean | null;
   setViewMode: (isDark: boolean) => void;
   signIn: (email: string, password: string) => Promise<UserCredential>;
-  signUp: (email: string, password: string) => Promise<UserCredential>;
+  signUp: (email: string, password: string, userDetails: UserDetails) => Promise<User>;
   updateUserDetails: (userDetails: UserDetails) => void;
   signOut: () => void;
 };
@@ -59,6 +59,14 @@ const AuthContextProvider = (props: any) => {
     }
   }
 
+  const handleSignUp = async (email: string, password: string, userDetails: UserDetails): Promise<User> => {
+    const {user} = await createUser(email, password);
+    if (user) {
+      updateUserDetails(user.uid, userDetails)
+    }
+    return user;
+  }
+
   const value: AuthContextType = {
     user,
     userDetails,
@@ -66,7 +74,7 @@ const AuthContextProvider = (props: any) => {
     isDarkMode,
     setViewMode: (isDark: boolean) => handleViewModeChanges(isDark),
     signIn: (email: string, password: string) => signIn(email, password),
-    signUp: (email: string, password: string) => createUser(email, password),
+    signUp: (email: string, password: string, userDetails: UserDetails) => handleSignUp(email, password, userDetails),
     updateUserDetails: (userDetails: UserDetails) => {
       if (user) {
         updateUserDetails(user.uid, userDetails);
