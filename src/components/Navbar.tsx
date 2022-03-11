@@ -11,9 +11,8 @@ import {
   MoonIcon,
   UserCircleIcon,
 } from "@heroicons/react/outline";
-import "../styles/Navbar.scss";
 import ProfileMenu from "./ProfileMenu";
-import { NavbarParam } from "../models/navbarParam";
+import "../styles/Navbar.scss";
 
 const navigation = [
   { name: "Blogs", href: "/blog", current: false },
@@ -21,8 +20,8 @@ const navigation = [
   { name: "About", href: "/about", current: false },
 ];
 
-const Navbar = ({setViewMode, isDark}: NavbarParam) => {
-  const { isLoggedIn } = useUser();
+const Navbar = () => {
+  const { isLoggedIn, isDarkMode, setViewMode } = useUser();
   const [isOpened, setOpened] = useState<boolean>(false);
 
   const classNames = (...classes: string[]): string => {
@@ -91,10 +90,10 @@ const Navbar = ({setViewMode, isDark}: NavbarParam) => {
                   <button
                     type="button"
                     className="navRoundedButton"
-                    onClick={() => setViewMode(!isDark)}
+                    onClick={() => setViewMode(!isDarkMode)}
                   >
                     <span className="sr-only">Toggle Dark Mode</span>
-                    {isDark ? (
+                    {isDarkMode ? (
                       <SunIcon className="block h-6 w-6" aria-hidden="true" />
                     ) : (
                       <MoonIcon className="block h-6 w-6" aria-hidden="true" />

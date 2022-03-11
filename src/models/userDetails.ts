@@ -7,6 +7,7 @@ type UserDetails = {
   first_name: string;
   last_name: string;
   creation_date: Timestamp;
+  darkMode: boolean | null;
 }
 
 export default UserDetails;
