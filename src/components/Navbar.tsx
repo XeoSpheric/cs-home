@@ -1,23 +1,22 @@
-import { Modal } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import AuthPage from "../pages/AuthPage";
-import { useUser } from "../services/authContext";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Modal } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import AuthPage from '../pages/AuthPage';
+import { useUser } from '../services/authContext';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   MenuIcon,
   XIcon,
   SunIcon,
   MoonIcon,
   UserCircleIcon,
-} from "@heroicons/react/outline";
-import ProfileMenu from "./ProfileMenu";
-import "../styles/Navbar.scss";
+} from '@heroicons/react/outline';
+import ProfileMenu from './ProfileMenu';
+import '../styles/Navbar.scss';
 
 const navigation = [
-  { name: "Blogs", href: "/blog", current: false },
-  { name: "Yut", href: "/yut", current: false },
-  { name: "About", href: "/about", current: false },
+  { name: 'Blogs', href: '/blog', current: false },
+  { name: 'About', href: '/about', current: false },
 ];
 
 const Navbar = () => {
@@ -25,7 +24,7 @@ const Navbar = () => {
   const [isOpened, setOpened] = useState<boolean>(false);
 
   const classNames = (...classes: string[]): string => {
-    return classes.filter(Boolean).join(" ");
+    return classes.filter(Boolean).join(' ');
   };
 
   const closeModal = (): void => {
@@ -63,7 +62,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link to={"/"}>
+                    <Link to={'/'}>
                       <img
                         className="block h-8 w-auto"
                         src="/favicon.svg"
@@ -77,8 +76,8 @@ const Navbar = () => {
                         <Link
                           key={item.name}
                           to={item.href}
-                          className={"navButtonBase"}
-                          aria-current={item.current ? "page" : undefined}
+                          className={'navButtonBase'}
+                          aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
                         </Link>
@@ -126,11 +125,11 @@ const Navbar = () => {
                     to={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "navButtonBase"
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'navButtonBase'
                     )}
-                    aria-current={item.current ? "page" : undefined}
+                    aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
                   </Link>

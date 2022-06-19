@@ -1,27 +1,26 @@
-import { Badge, Card, Group, Text, useMantineTheme } from "@mantine/core";
-import { useEffect, useState } from "react";
-import HomeCard from "../components/Card";
-import "../styles/Home.scss";
+import { useEffect } from 'react';
+import HomeCard from '../components/Card';
+import '../styles/Home.scss';
 
 const Home = () => {
-  const theme = useMantineTheme();
-  const secondaryColor =
-    theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
-  const [show, setShow] = useState<boolean>(false);
   useEffect(() => {
-    setTimeout(() => {
-      setShow(true);
-    }, 100);
+    getStarWars();
   }, []);
+
+  const getStarWars = async () => {
+    const data = await fetch('https://swapi.dev/api/people/1');
+    data.json().then((d) => console.log(d));
+  };
+
   return (
     <>
       <div className="home-hero">
-        <div className={show ? "hero-content show" : "hero-content"}>
+        <div className={'hero-content show'}>
           <div className="font-extrabold text-4xl">
-            Feeling stuck, but want the 
-          <span className="gradient-text font-extrabold text-4xl ml-2">
-            Extroradiary
-          </span>
+            Feeling stuck, but want the
+            <span className="gradient-text font-extrabold text-4xl ml-2">
+              Extroradiary
+            </span>
           </div>
           <div className="font-extrabold text-xl">
             That is how I have felt working on some projects, but wanted to take
@@ -32,11 +31,11 @@ const Home = () => {
         </div>
         <div className="hero-content show">
           <HomeCard
-            title={"A future writeup of the site"}
+            title={'A future writeup of the site'}
             body={
-              "Thanks to technogigies like, React, Mantine, Tailwind, and Firebase, a website like this is possible for anyone to make. The hardest part is deciding what something is going to look like."
+              'Thanks to technogigies like, React, Mantine, Tailwind, and Firebase, a website like this is possible for anyone to make. The hardest part is deciding what something is going to look like.'
             }
-            show={show}
+            show={true}
             index={1}
             moveHandler={() => {}}
           />
